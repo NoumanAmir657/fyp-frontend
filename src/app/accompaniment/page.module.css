@@ -1,0 +1,110 @@
+.textCenter{
+    font-family: YourFontName;
+}
+
+.inputFieldContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10dvh;
+    background-color: salmon;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputFile {
+    opacity: 0;
+}
+
+.box {
+    background-color: aqua;
+}
+
+.waveformContainer {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 7dvh;
+}
+
+.instruments {
+    width: 6dvw;
+    margin-right: 20dvh;
+    color: white;
+    font-weight: 500;
+    font-size: 75%;
+    border-radius: 20px 20px 20px 20px;
+    text-align: center;
+    padding-top: 1dvh;
+    padding-bottom: 1dvh;
+}
+
+.instrumentsContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 7dvh;
+}
+
+.melodyButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 8dvh;
+}
+
+.melodyButton {
+    border-radius: 20px 20px 20px 20px;
+    padding: 1dvh 1dvh 1dvh 1dvh;
+    background-color: rgb(254,65,100);
+    color: white;
+    height: 7dvh;
+    font-weight: 500;
+    border: none;
+    box-shadow: 10px;
+}
+
+.melodyButton:hover {
+    background-color: #5e0087;
+}
+
+/* CSS */
+.uploadButton {
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 5px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px var(--secondary-color), 2px 2px 0px 0px var(--secondary-color), 3px 3px 0px 0px var(--secondary-color), 4px 4px 0px 0px var(--secondary-color), 5px 5px 0px 0px var(--secondary-color);
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border-color: var(--secondary-color);
+}
+
+.uploadButton:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .uploadButton {
+    padding: 0.25em 0.75em;
+  }
+}
+
+@keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+.pulse:hover {
+animation: pulse 1s infinite;
+}
