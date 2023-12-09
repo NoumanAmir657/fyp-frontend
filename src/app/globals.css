@@ -22,5 +22,5 @@ body {
   overflow-x: hidden;
   background-color: var(--background-color);
   color :var(--primary-color);
-  font-family: 'YourFontName', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }

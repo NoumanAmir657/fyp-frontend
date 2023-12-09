@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 
 import "../globals.css"
 
@@ -15,13 +15,17 @@ const AccompanimentPage = () => {
     const fileInputRef = useRef(null)
     const waveformRef_melody = useRef(null);
     const waveformRef_accompaniment = useRef(null);
+    const waveformRef_vocals = useRef(null)
+    const waveformRef_instruments = useRef(null)
     const [instruments, setInstruments] = useState([])
     const [accompaintment, setAccompaintment] = useState(null)
+    const [vocals, setVocals] = useState(null)
+    const [instrumental, setInstrumental] = useState(null)
 
     return (
         <div>
             <div className="text-center">
-                <p className="text-4xl font-bold" style={{fontFamily: 'YourFontName'}}>Accompaniment Generation</p>
+                <p className="text-4xl font-bold mt-5" style={{fontFamily: 'YourFontName'}}>Accompaniment Generation</p>
             </div>
 
             <UploadButton fileInputRef={fileInputRef} inputFile={inputFile} setFile={setInputFile} error={error} setError={setError}/>
@@ -33,25 +37,45 @@ const AccompanimentPage = () => {
             {inputFile && (
             <>
                 <div className="text-center mt-2">
-                    <p className="text-xl" style={{fontFamily: 'YourFontName'}}>{inputFile.name}</p>
+                    <p style={{fontFamily: 'Poppins'}}>{inputFile.name}</p>
                 </div>
 
-                <Wave waveformRef={waveformRef_melody} waveFile={inputFile}/>
-            
-                <div className="w-full flex justify-center mt-5" style={{fontFamily: 'YourFontName'}}>
+                <div className="w-full flex justify-center">
+                    <Wave waveformRef={waveformRef_melody} waveFile={inputFile}/>
+                </div>
+                
+                <div className="text-center text-2xl" style={{fontFamily: 'YourFontName  '}}>
+                    Choose Instruments
+                </div>
+                
+                <div className="w-full flex justify-center">
                     <Instrument name={"drums"} instruments={instruments} setInstruments={setInstruments}/>
                     <Instrument name={"piano"} instruments={instruments} setInstruments={setInstruments}/>
                     <Instrument name={"guitar"} instruments={instruments} setInstruments={setInstruments}/>
                 </div>
 
-                <GenerateButton accompaniment={accompaintment} setAccompaintment={setAccompaintment} instruments={instruments} inputFile={inputFile}/>
+                <GenerateButton accompaniment={accompaintment} setAccompaintment={setAccompaintment} instruments={instruments} inputFile={inputFile} setInstrumental={setInstrumental} setVocals={setVocals}/>
 
                 {accompaintment && (
                         <>
-                            <div className="text-center">
-                                <p className="text-xl font-bold" style={{fontFamily: 'YourFontName'}}>Generated Accompaniment</p>
+                            <div className="w-full flex text-2xl mt-2" style={{fontFamily: 'YourFontName'}}>
+                                <div className="w-full text-center">
+                                    Vocals
+                                </div>
+                                <div className="w-full text-center">
+                                    Instruments
+                                </div>
                             </div>
-                            <Wave waveformRef={waveformRef_accompaniment} waveFile={accompaintment}/>
+                            <div className="w-full flex justify-center mr-5">
+                                <Wave waveformRef={waveformRef_vocals} waveFile={accompaintment}/>
+                                <Wave waveformRef={waveformRef_instruments} waveFile={accompaintment}/>
+                            </div>
+                            <div className="w-full text-center text-2xl" style={{fontFamily: 'YourFontName'}}>
+                                Accompaniment
+                            </div>
+                            <div className="w-full flex justify-center mr-5 mb-5">
+                                <Wave waveformRef={waveformRef_accompaniment} waveFile={accompaintment}/>
+                            </div>
                         </>
                 )}
             </>

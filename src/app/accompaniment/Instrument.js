@@ -19,7 +19,7 @@ const Instrument = ({name, instruments, setInstruments}) => {
     return (
         <div onClick={handleClicked} className="ml-10 mr-10 rounded-lg p-2" style={{backgroundColor: clicked ? 'pink' : '#FFF2F9'}}>
             <img src={`/icons/` + name + `.svg`} height='70px' width='70px' className={styles.pulse}/>
-            <p className="text-center font-medium">Drums</p>
+            <p style={{fontFamily: 'Poppins'}} className="text-center font-medium">{name.charAt(0).toUpperCase() + name.slice(1)}</p>
         </div>
     )
 }

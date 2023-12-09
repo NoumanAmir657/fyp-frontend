@@ -5,8 +5,12 @@ import { useEffect, useRef } from "react";
 
 import WaveSurfer from 'wavesurfer.js';
 
+import Instrument from "./Instrument";
+
 const Wave = ({waveformRef, waveFile}) => {
     const wavesurferRef = useRef(null);
+    const instruments = null
+    const setInstruments = null
 
     useEffect(() => {
         if (waveFile) {
@@ -16,12 +20,11 @@ const Wave = ({waveformRef, waveFile}) => {
             waveColor: '#FE83C6',
             progressColor: '#FA4EAB',
             responsive: true,
-            barWidth: 10,
+            barWidth: 5,
             barRadius: 10,
             barGap: 2,
           });
     
-          // Load the selected audio file
           wavesurfer.load(URL.createObjectURL(waveFile));
 
           wavesurferRef.current = wavesurfer;
@@ -39,9 +42,11 @@ const Wave = ({waveformRef, waveFile}) => {
 
     return (
         <>
-            <div ref={waveformRef} onClick={handleWaveformClick} className="w-11/12 mx-auto mt-7"/>
-            <div className="w-full flex justify-center mt-2">
-                <button className={styles.uploadButton} style={{fontFamily: 'YourFontName'}} role="button" onClick={handleWaveformClick}>Play/Pause</button>
+            <div className="mt-8 mr-5 ml-10">
+                <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleWaveformClick}>Play/Pause</button>
+            </div>
+            <div className="w-full">
+                <div ref={waveformRef} onClick={handleWaveformClick} className="w-full mx-auto mt-2 pr-10"/>
             </div>
         </>
     )
