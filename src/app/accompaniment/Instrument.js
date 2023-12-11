@@ -7,11 +7,18 @@ const Instrument = ({name, instruments, setInstruments}) => {
     const [clicked, setClicked] = useState(false)
 
     const handleClicked = () => {
+        const n = name.replace(/\n/g, "-")
+        if (!instruments.includes(n)) {
+            if ((n == 'drums' || n == 'double-time' || n == 'half-time') && (instruments.includes('drums') || instruments.includes('double-time') || instruments.includes('half-time'))) {
+                return
+            }
+        }
+
         if (clicked) {
-            setInstruments(instruments.filter(instrument => instrument != name.replace(/\n/g, "-")))
+            setInstruments(instruments.filter(instrument => instrument != n))
         }
         else {
-            setInstruments([...instruments, name.replace(/\n/g, "-")])
+            setInstruments([...instruments, n])
         }
         setClicked(!clicked)
     }
