@@ -39,7 +39,7 @@ const UploadButton = ({fileInputRef, file, setFile, error, setError}) => {
     return(
         <>
             <input id='fileLoader' ref={fileInputRef} type='file' className="hidden" onChange={handleFileChange}/>
-            <div className="w-full flex justify-center mt-2"><button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={() => document.getElementById('fileLoader').click()}>Upload melody</button></div>
+            <div className="w-full flex justify-center mt-2 font-bold text-xl"><button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={() => document.getElementById('fileLoader').click()}>Upload melody</button></div>
         </>
     )
 }

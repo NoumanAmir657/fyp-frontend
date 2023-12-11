@@ -70,7 +70,7 @@ const GenerateButton = ({accompaniment, setAccompaintment, instruments, inputFil
     };
 
     return (
-        <div className="w-full flex justify-center mt-6">
+        <div className="w-full flex justify-center mt-6 font-bold">
             <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleSend}>Generate Accompaniment</button>
         </div>
     )

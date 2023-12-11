@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useRef } from "react";
 
 import "../globals.css"
+import styles from './page.module.css'
 
 import UploadButton from './UploadButton';
 import Wave from "./Wave";
@@ -44,7 +45,7 @@ const AccompanimentPage = () => {
                     <Wave waveformRef={waveformRef_melody} waveFile={inputFile}/>
                 </div>
                 
-                <div className="text-center text-2xl" style={{fontFamily: 'YourFontName  '}}>
+                <div className="text-center text-3xl mb-1" style={{fontFamily: 'YourFontName  '}}>
                     Choose Instruments
                 </div>
                 
@@ -52,13 +53,15 @@ const AccompanimentPage = () => {
                     <Instrument name={"drums"} instruments={instruments} setInstruments={setInstruments}/>
                     <Instrument name={"piano"} instruments={instruments} setInstruments={setInstruments}/>
                     <Instrument name={"guitar"} instruments={instruments} setInstruments={setInstruments}/>
+                    <Instrument name={"double\ntime"} instruments={instruments} setInstruments={setInstruments}/>
+                    <Instrument name={"half\ntime"} instruments={instruments} setInstruments={setInstruments}/> 
                 </div>
 
                 <GenerateButton accompaniment={accompaintment} setAccompaintment={setAccompaintment} instruments={instruments} inputFile={inputFile} setInstrumental={setInstrumental} setVocals={setVocals}/>
-
+                
                 {accompaintment && (
                         <>
-                            <div className="w-full flex text-2xl mt-2" style={{fontFamily: 'YourFontName'}}>
+                            <div className="w-full flex text-3xl mt-2" style={{fontFamily: 'YourFontName'}}>
                                 <div className="w-full text-center">
                                     Vocals
                                 </div>
@@ -67,13 +70,13 @@ const AccompanimentPage = () => {
                                 </div>
                             </div>
                             <div className="w-full flex justify-center mr-5">
-                                <Wave waveformRef={waveformRef_vocals} waveFile={accompaintment}/>
-                                <Wave waveformRef={waveformRef_instruments} waveFile={accompaintment}/>
+                                <Wave waveformRef={waveformRef_vocals} waveFile={vocals}/>
+                                <Wave waveformRef={waveformRef_instruments} waveFile={instrumental}/>
                             </div>
-                            <div className="w-full text-center text-2xl" style={{fontFamily: 'YourFontName'}}>
+                            <div className="w-full text-center text-3xl" style={{fontFamily: 'YourFontName'}}>
                                 Accompaniment
                             </div>
-                            <div className="w-full flex justify-center mr-5 mb-5">
+                            <div className="w-full flex justify-center mr-5 mb-12">
                                 <Wave waveformRef={waveformRef_accompaniment} waveFile={accompaintment}/>
                             </div>
                         </>
