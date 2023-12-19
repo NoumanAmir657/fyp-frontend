@@ -13,6 +13,7 @@ const GenerateSourceButton = ({inputFile, setInstrumental, setVocals}) => {
                 method: 'POST',
                 body: formData,
             });
+            console.log("Hello SS")
         
             if (response.ok) {
                 const blob = await response.blob();
@@ -23,29 +24,25 @@ const GenerateSourceButton = ({inputFile, setInstrumental, setVocals}) => {
 
                 const vocalsFile = zipFiles.file('vocals.wav')
                 const insFile = zipFiles.file('instruments.wav')
-                // const accomFile = zipFiles.file('accompaniment.wav');
                 const vocalsBlob = await vocalsFile.async('blob');
                 const vocals = new File([vocalsBlob], 'vocals.wav', { type: 'audio/wav' });
                 const insBlob = await insFile.async('blob');
                 const ins = new File([insBlob], 'instruments.wav', { type: 'audio/wav' });
-                // const accomBlob = await accomFile.async('blob');
-                // const accom = new File([accomBlob], 'accompaniment.wav', { type: 'audio/wav' });
 
-                // setAccompaintment(accom)
                 setInstrumental(ins)
                 setVocals(vocals)
                 
             } else {
                 console.error('Error processing audio:', response.statusText);
             }
-            } catch (error) {
+        } catch (error) {
             console.error('Error uploading audio:', error);
-        }          
+        }
     };
 
     return (
-        <div className="w-full flex justify-center mt-6 font-bold mr-28">
-            <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleSend}>Generate Vocals</button>
+        <div className="w-full flex justify-center mt-6 font-bold">
+            <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleSend}>Generate Sources</button>
         </div>
     )
 }
