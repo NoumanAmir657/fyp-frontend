@@ -1,16 +1,15 @@
 "use client";
 
-import LyricsDisplay from "../components/LyricsDisplay";
-import AudioPlayer from "../components/AudioPlayer";
+import LyricsDisplay from "./LyricsDisplay";
+import AudioPlayer from "./AudioPlayer";
 
-const IndexPage = () => {
+const KaraokePage = () => {
     return (
-        <div>
-        <h1>Karaoke</h1>
-        <AudioPlayer/>
-        <LyricsDisplay/>
-        </div>
+        <>
+            <AudioPlayer/>
+            <LyricsDisplay/>
+        </>
     );
 };
 
-export default IndexPage;
+export default KaraokePage;

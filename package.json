@@ -11,6 +11,7 @@
   "dependencies": {
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.2",
+    "flowbite-react": "^0.7.2",
     "fs": "^0.0.1-security",
     "jszip": "^3.10.1",
     "next": "13.5.6",

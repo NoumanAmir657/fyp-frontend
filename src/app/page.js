@@ -1,22 +1,30 @@
-// pages/index.js
 'use client';
-import React, { useEffect, useState } from 'react';
+
+import AccompanimentPage from './accompaniment/page';
+import SourceSeparatorPage from './sourceSeparation/page';
+import Navigation from './components/Navigation';
+import { useEffect, useState } from 'react';
+import KaraokePage from './karaoke/page';
 
 function Home() {
-  // const [message, setMessage] = useState('');
-
-  // useEffect(() => {
-  //   fetch('http://127.0.0.1:8000/api/home/')
-  //     .then((response) => response.json())
-  //     .then((data) => setMessage(data.message))
-  //     .catch((error) => console.error(error));
-  // }, []);
+  const [path, setPath] = useState()
 
   return (
-    <div>
-      <h1>Hello, Next.js!</h1>
-      {/* <p>Message from the API: {message}</p> */}
-    </div>
+    <>
+      <Navigation path={path} setPath={setPath}/>
+
+      {path == 'accompaniment' && (
+        <AccompanimentPage/>
+      )}
+
+      {path == 'sourceSeparation' && (
+        <SourceSeparatorPage/>
+      )}
+
+      {path == 'karaoke' && (
+        <KaraokePage/>
+      )}
+    </>
   );
 }
 
