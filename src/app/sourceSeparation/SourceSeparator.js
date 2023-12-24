@@ -5,12 +5,36 @@ import { useEffect, useRef, useState } from "react";
 
 import WaveSurfer from 'wavesurfer.js';
 
-const SourceSeparator = ({waveformRefVocals, waveformRefIns, waveFileVocals, waveFileIns}) => {
+const SourceSeparator = ({waveformRefMelody, waveformRefVocals, waveformRefIns, waveFileMelody, waveFileVocals, waveFileIns}) => {
     const wavesurferRefVocals = useRef(null)
     const wavesurferRefIns = useRef(null)
+    const wavesurferRefMelody = useRef(null)
     const [vocalsVol, setVocalsVol] = useState(0.5)
     const [insVol, setInsVol] = useState(0.5)
     
+    useEffect(() => {
+        if (waveFileMelody) {
+          // Initialize WaveSurfer
+          const wavesurfer = WaveSurfer.create({
+            container: waveformRefMelody.current,
+            waveColor: '#FE83C6',
+            progressColor: '#FA4EAB',
+            responsive: true,
+            barWidth: 5,
+            barRadius: 10,
+            barGap: 2,
+          });
+    
+          wavesurfer.load(URL.createObjectURL(waveFileMelody));
+          wavesurfer.setVolume(0)
+
+          wavesurferRefMelody.current = wavesurfer;
+    
+          // Clean up on component unmount
+          return () => wavesurfer.destroy();
+        }
+    }, [waveFileMelody]);
+
     useEffect(() => {
         if (waveFileVocals) {
           // Initialize WaveSurfer
@@ -59,8 +83,9 @@ const SourceSeparator = ({waveformRefVocals, waveformRefIns, waveFileVocals, wav
 
     const handleWaveformClick = () => {
         if (wavesurferRefVocals.current && waveformRefIns.current) {
-          wavesurferRefVocals.current.playPause();
-          wavesurferRefIns.current.playPause();
+            wavesurferRefMelody.current.playPause();
+            wavesurferRefVocals.current.playPause();
+            wavesurferRefIns.current.playPause();
         }
     };
 
@@ -68,6 +93,7 @@ const SourceSeparator = ({waveformRefVocals, waveformRefIns, waveFileVocals, wav
         if (wavesurferRefVocals.current && waveformRefIns.current) {
           wavesurferRefVocals.current.seekTo(0)
           wavesurferRefIns.current.seekTo(0)
+          wavesurferRefMelody.current.seekTo(0)
         }
     };
 
@@ -85,47 +111,53 @@ const SourceSeparator = ({waveformRefVocals, waveformRefIns, waveFileVocals, wav
 
     return (
         <>
-        <div className="w-full flex justify-center mr-7 mt-5">
-            <div className="w-full ml-10">
+        <div className="w-full mr-7 mt-5">
+            <div className="w-full flex justify-center">
+                <div ref={waveformRefMelody} onClick={handleWaveformClick} className="w-full mx-auto mt-2 pr-10"/>
+                <div className="mr-14 mt-11">
+                    <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleWaveformClick}>Play/Pause</button>
+                </div>
+                <div className="ml-14 mt-11">
+                    <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleRestart}>Restart</button>
+                </div>
+            </div>
+
+            <div className="w-full flex justify-center mt-6">
+                <div className="w-full mr-4">
+                    <p className="text-center text-2xl" style={{fontFamily: 'YourFontName'}}>Vocals</p>
+                    <input
+                            id='slider'
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={vocalsVol}
+                            className={styles.slider2}
+                            onChange={handleVocalsVol}
+                    />
+                </div>
+                <div className="w-full mr-4">
+                    <p className="text-center text-2xl" style={{fontFamily: 'YourFontName'}}>Instrumental</p>
+                    <input
+                            id='slider'
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={insVol}
+                            className={styles.slider2}
+                            onChange={handleInsVol}
+                    />
+                </div>
+            </div>
+
+            <div className="w-full hidden">
                 <div ref={waveformRefVocals} onClick={handleWaveformClick} className="w-full mx-auto mt-2 pr-10"/>
             </div>
-
-            <input
-                    id='slider'
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={vocalsVol}
-                    className={styles.slider}
-                    onChange={handleVocalsVol}
-            />
-
-            <div className="w-full">
+            <div className="w-full hidden">
                 <div ref={waveformRefIns} onClick={handleWaveformClick} className="w-full mx-auto mt-2 pr-10"/>
             </div>
-
-            <input
-                    id='slider'
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={insVol}
-                    className={styles.slider}
-                    onChange={handleInsVol}
-            />
         </div>
-
-        <div className="w-full flex justify-center mt-10">
-            <div className="mr-28">
-                <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleWaveformClick}>Play/Pause</button>
-            </div>
-            <div className="ml-28">
-                <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleRestart}>Restart</button>
-            </div>
-        </div>
-
         </>
     )
 }

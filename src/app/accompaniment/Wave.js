@@ -23,7 +23,7 @@ const Wave = ({waveformRef, waveFile}) => {
           });
     
           wavesurfer.load(URL.createObjectURL(waveFile));
-
+          wavesurfer.setVolume(volume)
           wavesurferRef.current = wavesurfer;
     
           // Clean up on component unmount

@@ -47,15 +47,10 @@ const SourceSeparatorPage = () => {
                     
                     {vocals && (
                         <>
-                        <div className="w-full flex text-3xl mt-5" style={{fontFamily: 'YourFontName'}}>
-                            <div className="w-full text-center">
-                                Vocals
-                            </div>
-                            <div className="w-full text-center">
-                                Instruments
-                            </div>
+                        <div className="w-full text-3xl mt-8 text-center" style={{fontFamily: 'YourFontName'}}>
+                                Tracks
                         </div>
-                            <SourceSeparator waveformRefVocals={waveformRef_vocals} waveformRefIns={waveformRef_instruments} waveFileVocals={vocals} waveFileIns={instrumental}/>
+                            <SourceSeparator waveformRefMelody={waveformRef_melody} waveformRefVocals={waveformRef_vocals} waveformRefIns={waveformRef_instruments} waveFileMelody={inputFile} waveFileVocals={vocals} waveFileIns={instrumental}/>
                         </>
                     )}
 

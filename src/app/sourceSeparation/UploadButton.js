@@ -15,24 +15,10 @@ const UploadButton = ({fileInputRef, file, setFile, error, setError}) => {
                 fileInputRef.current.value = ''
                 return;
             }
-        
-            // Check if the file duration is between 10 to 30 seconds
-            const audio = new Audio();
-            audio.src = URL.createObjectURL(selectedFile);
-        
-            audio.addEventListener('loadedmetadata', () => {
-                const duration = audio.duration;
-                if (duration < 10 || duration > 30) {
-                    setError('File duration should be between 10 to 30 seconds.');
-                    setFile(null)
-                    fileInputRef.current.value = ''
-                    return;
-                }
-        
-                // If all conditions are met, set the file
-                setFile(selectedFile);
-                setError('');
-            });
+               
+            // If all conditions are met, set the file
+            setFile(selectedFile);
+            setError('');
         }
     };
 
