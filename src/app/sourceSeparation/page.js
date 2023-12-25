@@ -13,7 +13,8 @@ const SourceSeparatorPage = () => {
     const [inputFile, setInputFile] = useState(null);
     const [error, setError] = useState('');
     const fileInputRef = useRef(null)
-    const waveformRef_melody = useRef(null);
+    const waveformRef_melody = useRef(null)
+    const waveformRef_melody_2 = useRef(null)
     const waveformRef_vocals = useRef(null)
     const waveformRef_instruments = useRef(null)
     const waveformRef_bass = useRef(null)
@@ -27,7 +28,7 @@ const SourceSeparatorPage = () => {
         <>
         <div className="mr-28 ml-28">
             <p className="text-5xl text-center" style={{fontFamily: 'YourFontName'}}>Source Separation</p>
-            <UploadButton fileInputRef={fileInputRef} inputFile={inputFile} setFile={setInputFile} error={error} setError={setError}/>
+            <UploadButton fileInputRef={fileInputRef} inputFile={inputFile} setFile={setInputFile} error={error} setError={setError} setVocals={setVocals} setInstrumental={setInstrumental} setDrums={setDrums} setBass={setBass}/>
 
             {error && (
                 <>
@@ -55,7 +56,7 @@ const SourceSeparatorPage = () => {
                                 Tracks
                         </div>
                             <SourceSeparator 
-                            waveformRefMelody={waveformRef_melody} 
+                            waveformRefMelody={waveformRef_melody_2} 
                             waveformRefVocals={waveformRef_vocals} 
                             waveformRefIns={waveformRef_instruments} 
                             waveformRefDrums={waveformRef_drums}

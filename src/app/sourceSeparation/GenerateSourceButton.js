@@ -13,7 +13,6 @@ const GenerateSourceButton = ({inputFile, setInstrumental, setVocals, setDrums, 
                 method: 'POST',
                 body: formData,
             });
-            console.log("Hello SS")
         
             if (response.ok) {
                 const blob = await response.blob();
@@ -22,21 +21,21 @@ const GenerateSourceButton = ({inputFile, setInstrumental, setVocals, setDrums, 
                 const zip = new JSZip();
                 const zipFiles = await zip.loadAsync(blob);
 
-                const vocalsFile = zipFiles.file('vocals.mp3')
+                const vocalsFile = zipFiles.file('vocals.wav')
                 const vocalsBlob = await vocalsFile.async('blob');
-                const vocals = new File([vocalsBlob], 'vocals.mp3', { type: 'audio/mp3' });
+                const vocals = new File([vocalsBlob], 'vocals.wav', { type: 'audio/wav' });
 
-                const insFile = zipFiles.file('others.mp3')
+                const insFile = zipFiles.file('others.wav')
                 const insBlob = await insFile.async('blob');
-                const ins = new File([insBlob], 'others.mp3', { type: 'audio/mp3' });
+                const ins = new File([insBlob], 'others.wav', { type: 'audio/wav' });
 
-                const drumsFile = zipFiles.file('drums.mp3')
+                const drumsFile = zipFiles.file('drums.wav')
                 const drumsBlob = await drumsFile.async('blob');
-                const drums = new File([drumsBlob], 'drums.mp3', { type: 'audio/mp3' });
+                const drums = new File([drumsBlob], 'drums.wav', { type: 'audio/wav' });
 
-                const bassFile = zipFiles.file('bass.mp3')
+                const bassFile = zipFiles.file('bass.wav')
                 const bassBlob = await bassFile.async('blob');
-                const bass = new File([bassBlob], 'bass.mp3', { type: 'audio/mp3' });
+                const bass = new File([bassBlob], 'bass.wav', { type: 'audio/wav' });
 
                 setInstrumental(ins)
                 setVocals(vocals)

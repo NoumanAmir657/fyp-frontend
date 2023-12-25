@@ -1,7 +1,7 @@
 import styles from "./page.module.css"
 import "../globals.css";
 
-const UploadButton = ({fileInputRef, file, setFile, error, setError}) => {
+const UploadButton = ({fileInputRef, file, setFile, error, setError, setVocals, setInstrumental, setDrums, setBass}) => {
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -18,6 +18,10 @@ const UploadButton = ({fileInputRef, file, setFile, error, setError}) => {
                
             // If all conditions are met, set the file
             setFile(selectedFile);
+            setVocals(null)
+            setInstrumental(null)
+            setDrums(null)
+            setBass(null)
             setError('');
         }
     };
