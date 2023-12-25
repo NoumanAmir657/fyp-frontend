@@ -16,8 +16,12 @@ const SourceSeparatorPage = () => {
     const waveformRef_melody = useRef(null);
     const waveformRef_vocals = useRef(null)
     const waveformRef_instruments = useRef(null)
+    const waveformRef_bass = useRef(null)
+    const waveformRef_drums = useRef(null)
     const [vocals, setVocals] = useState(null)
     const [instrumental, setInstrumental] = useState(null)
+    const [drums, setDrums] = useState(null)
+    const [bass, setBass] = useState(null)
 
     return (
         <>
@@ -42,7 +46,7 @@ const SourceSeparatorPage = () => {
                     </div>
 
                     <div className="w-full flex justify-normal">
-                        <GenerateSourceButton inputFile={inputFile} setInstrumental={setInstrumental} setVocals={setVocals}/>
+                        <GenerateSourceButton inputFile={inputFile} setInstrumental={setInstrumental} setVocals={setVocals} setDrums={setDrums} setBass={setBass}/>
                     </div>
                     
                     {vocals && (
@@ -50,7 +54,18 @@ const SourceSeparatorPage = () => {
                         <div className="w-full text-3xl mt-8 text-center" style={{fontFamily: 'YourFontName'}}>
                                 Tracks
                         </div>
-                            <SourceSeparator waveformRefMelody={waveformRef_melody} waveformRefVocals={waveformRef_vocals} waveformRefIns={waveformRef_instruments} waveFileMelody={inputFile} waveFileVocals={vocals} waveFileIns={instrumental}/>
+                            <SourceSeparator 
+                            waveformRefMelody={waveformRef_melody} 
+                            waveformRefVocals={waveformRef_vocals} 
+                            waveformRefIns={waveformRef_instruments} 
+                            waveformRefDrums={waveformRef_drums}
+                            waveformRefBass={waveformRef_bass} 
+                            waveFileMelody={inputFile} 
+                            waveFileVocals={vocals} 
+                            waveFileIns={instrumental}
+                            waveFileDrums={drums}
+                            waveFileBass={bass}
+                            />
                         </>
                     )}
 
