@@ -24,3 +24,12 @@ body {
   color :var(--primary-color);
   font-family: 'Poppins', sans-serif;
 }
+
+.play {
+  color: #FE83C6;
+  cursor: pointer;
+}
+
+.play:hover {
+  fill: #FA4EAB;
+}

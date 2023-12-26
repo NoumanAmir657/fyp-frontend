@@ -2,6 +2,8 @@ import styles from "./page.module.css"
 import "../globals.css";
 
 import { useEffect, useRef, useState } from "react";
+import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
+import { IconContext } from "react-icons"
 
 import WaveSurfer from 'wavesurfer.js';
 
@@ -15,6 +17,7 @@ const SourceSeparator = ({waveformRefMelody, waveformRefVocals, waveformRefIns, 
     const [insVol, setInsVol] = useState(0.5)
     const [drumsVol, setDrumsVol] = useState(0.5)
     const [bassVol, setBassVol] = useState(0.5)
+    const [play, setPlay] = useState(false)
     
     useEffect(() => {
         if (waveFileMelody) {
@@ -135,21 +138,12 @@ const SourceSeparator = ({waveformRefMelody, waveformRefVocals, waveformRefIns, 
 
     const handleWaveformClick = (event) => {
         if (wavesurferRefVocals.current && wavesurferRefIns.current && wavesurferRefMelody.current && wavesurferRefDrums.current && wavesurferRefBass.current) {
+            setPlay(!play)
             wavesurferRefVocals.current.playPause();
             wavesurferRefIns.current.playPause();
             wavesurferRefDrums.current.playPause();
             wavesurferRefBass.current.playPause();
             wavesurferRefMelody.current.playPause();
-        }
-    };
-
-    const handleRestart = () => {
-        if (wavesurferRefVocals.current && wavesurferRefIns.current && wavesurferRefMelody.current && wavesurferRefDrums.current && wavesurferRefBass.current) {
-          wavesurferRefVocals.current.seekTo(0)
-          wavesurferRefIns.current.seekTo(0)
-          wavesurferRefDrums.current.seekTo(0)
-          wavesurferRefBass.current.seekTo(0)
-          wavesurferRefMelody.current.seekTo(0)
         }
     };
 
@@ -188,14 +182,20 @@ const SourceSeparator = ({waveformRefMelody, waveformRefVocals, waveformRefIns, 
     return (
         <>
         <div className="w-full mr-7 mt-5">
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center ml-5">
+                <div className="mr-14 mt-7">
+                {!play && (
+                    <IconContext.Provider value={{ color: "#FE83C6", className: 'play' }}>
+                        <FaPlayCircle size='6em' onClick={handleWaveformClick}/>
+                    </IconContext.Provider>
+                )}
+                {play && (
+                    <IconContext.Provider value={{ color: "#FE83C6", className: 'play' }}>
+                        <FaPauseCircle size='6em' onClick={handleWaveformClick}/>
+                    </IconContext.Provider>
+                )}
+                </div>
                 <div ref={waveformRefMelody} onClick={(event) => handleAllClick(event)} className="w-full mx-auto mt-2 pr-10"/>
-                <div className="mr-14 mt-11">
-                    <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleWaveformClick}>Play/Pause</button>
-                </div>
-                <div className="ml-14 mt-11">
-                    <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleRestart}>Restart</button>
-                </div>
             </div>
 
             <div className="w-full flex justify-center mt-6">

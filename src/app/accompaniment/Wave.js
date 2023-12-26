@@ -3,11 +3,15 @@ import "../globals.css";
 
 import { useEffect, useRef, useState } from "react";
 
+import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
+import { IconContext } from "react-icons"
+
 import WaveSurfer from 'wavesurfer.js';
 
 const Wave = ({waveformRef, waveFile}) => {
     const wavesurferRef = useRef(null);
     const [volume, setVolume] = useState(0.5)
+    const [play, setPlay] = useState(false)
     
     useEffect(() => {
         if (waveFile) {
@@ -31,10 +35,8 @@ const Wave = ({waveformRef, waveFile}) => {
         }
     }, [waveFile]);
 
-    const handleWaveformClick = () => {
-        if (wavesurferRef.current) {
-          wavesurferRef.current.playPause();
-        }
+    const handleWaveformClick = (event) => {
+        wavesurferRef.current.seekTo(event.nativeEvent.offsetX / waveformRef.current.clientWidth)
     };
 
     const handleVolumeChange = (event) => {
@@ -43,14 +45,28 @@ const Wave = ({waveformRef, waveFile}) => {
         wavesurferRef.current.setVolume(newVolume);
     };
 
+    const handlePlayPause = (event) => {
+        setPlay(!play)
+        wavesurferRef.current.playPause();
+    }
+
     return (
         <>
-            <div className="mt-8 mr-5 ml-10">
-                <button className={styles.uploadButton} style={{fontFamily: 'Poppins'}} role="button" onClick={handleWaveformClick}>Play/Pause</button>
+            <div className="mt-5 mr-5 ml-5">
+                {!play && (
+                    <IconContext.Provider value={{ color: "#FE83C6", className: 'play' }}>
+                        <FaPlayCircle size='6em' onClick={handlePlayPause}/>
+                    </IconContext.Provider>
+                )}
+                {play && (
+                    <IconContext.Provider value={{ color: "#FE83C6", className: 'play' }}>
+                        <FaPauseCircle size='6em' onClick={handlePlayPause}/>
+                    </IconContext.Provider>
+                )}
             </div>
 
-            <div className="w-full">
-                <div ref={waveformRef} onClick={handleWaveformClick} className="w-full mx-auto mt-2 pr-10"/>
+            <div className="w-full ml-7">
+                <div ref={waveformRef} onClick={(event) => handleWaveformClick(event)} className="w-full mx-auto mt-2 pr-10"/>
             </div>
 
             <input

@@ -42,11 +42,11 @@ const SourceSeparatorPage = () => {
                         <p style={{fontFamily: 'Poppins'}}>{inputFile.name}</p>
                     </div>
 
-                    <div className="w-full flex justify-center">
+                    <div className="w-full flex justify-center mt-5">
                         <Wave waveformRef={waveformRef_melody} waveFile={inputFile} singleButton={false}/>
                     </div>
 
-                    <div className="w-full flex justify-normal">
+                    <div className="w-full flex justify-normal mt-5">
                         <GenerateSourceButton inputFile={inputFile} setInstrumental={setInstrumental} setVocals={setVocals} setDrums={setDrums} setBass={setBass}/>
                     </div>
                     
